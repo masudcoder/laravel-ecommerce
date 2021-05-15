@@ -128,6 +128,7 @@ class CartController extends Controller
         if (! session()->has('tracking_number')) {
             session()->put('tracking_number', Session::getId());
         }
+
         DB::table('temp_orders')->where('tracking_number', session()->get('tracking_number'))->where('temp_order_row_id',$request->temp_order_row_id)->delete();
     } 
 	
@@ -135,8 +136,11 @@ class CartController extends Controller
         if (! session()->has('tracking_number')) {
             session()->put('tracking_number', Session::getId());
         }
-		DB::table('temp_orders')                              
-                               ->where('tracking_number', session()->get('tracking_number'))->delete();
+
+		DB::table('temp_orders')
+            ->where('tracking_number', session()
+            ->get('tracking_number'))
+            ->delete();
     }
 
 	public function checkout1() {
@@ -152,7 +156,7 @@ class CartController extends Controller
     public function confirmOrder(Request $request)
     {
 
-         if (! session()->has('tracking_number')) {
+        if (! session()->has('tracking_number')) {
             session()->put('tracking_number', Session::getId());
           }
                 $tempOrders =DB::table('temp_orders')->where('tracking_number', session()->get('tracking_number'))->get();

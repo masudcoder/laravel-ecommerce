@@ -59,14 +59,13 @@ Route::get('/contact-us', function () {
     Route::get('/home', 'HomeController@index');
 
 
-    Route::group(['middleware' => 'admin', 'namespace' => 'Admin'], function () {           
+    Route::group(['middleware' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/admin', 'LoginController@login');
     Route::post('/postAdminLogin', 'LoginController@postAdminLogin'); 
     Route::get('/admin/logout', 'LoginController@logout');        
     Route::get('/admin/dashboard', 'DashboardController@index');
     
-
-	Route::get('/admin/products', 'ProductController@index');	
+    Route::get('/admin/products', 'ProductController@index');
 	Route::get('/admin/product/create', 'ProductController@create');
     Route::post('/admin/product/store', 'ProductController@store');    
     Route::get('/admin/product/edit/{id}', 'ProductController@edit');
@@ -85,21 +84,16 @@ Route::get('/contact-us', function () {
 	Route::get('/admin/category/show/{id}', 'CategoryController@show');
     Route::get('/admin/category/deleteRecord/{id}', 'CategoryController@deleteRecord');
     
-
-
-
-    
-	
     //order list and details
     Route::get('/admin/orders', 'OrderController@index');
     Route::get('/admin/orders/details/{tracking_number}', 'OrderController@orderDetails');
     Route::post('/admin/send-sms','OrderController@sendSms')->name('send.sms');
     Route::get('/admin/download/{order_id}','OrderController@downloadPdf')->name('download.pdf');
     Route::resource('/admin/coupons', 'CouponController@index');
+    Route::post('/admin/orders/saveStatus', 'OrderController@saveStatus');
 
     
-    
-    Route::get('/admin/menus', 'MenuController@index');    
+    Route::get('/admin/menus', 'MenuController@index');
     Route::get('/admin/menus/create', 'MenuController@create');
     Route::post('/admin/menus/store', 'MenuController@store');    
     Route::get('/admin/menus/edit/{id}', 'MenuController@edit');
@@ -114,6 +108,7 @@ Route::get('/contact-us', function () {
 	
 
 });
+
  Route::get('/test', 'TempController@test');
  Route::get('/thankyou', 'CartController@thankyou');
 
@@ -140,3 +135,14 @@ Route::get('auth/google', 'Auth\RegisterController@redirectToProvider');
   Route::get('auth/facebook', 'Auth\RegisterController@redirectToFacebook');
  Route::get('auth/facebook/callback', 'Auth\RegisterController@handleFacebookCallback');
 
+
+
+ // api
+Route::get('/api/products', 'ApiController@homeProducts');
+Route::get('/api/products/{id}', 'ApiController@productDetails');
+use Illuminate\Http\Request;
+
+header('Access-Control-Allow-Origin: *');
+//Access-Control-Allow-Origin: *
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');

@@ -4,6 +4,7 @@
   <title>Custom Laravel Ecommerce</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="_token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
@@ -53,7 +54,7 @@
   <div id="logo_container"><a href="{{ url('/') }}"><img src="{{ asset('/images/Logo.png') }}" alt="logo"></a></div>
   <div class="container text-center">
     <h1>Laravel Based Ecommerce</h1>      
-    <p class="color-lara">I will simply change the design for you.</p>
+    <p class="color-lara"> Will simply change the design for you.</p>
   </div>
 </div>
 
